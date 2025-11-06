@@ -109,8 +109,8 @@ export default function HomeScreen({ navigation }) {
 
         setTrendingMovies(trendingData.results || []);
         setAllMovies(allData.results || []);
-      } catch (err) {
-        console.error(err);
+      } catch (error) {
+        console.error(error);
       } finally {
         setLoading(false);
       }
