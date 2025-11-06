@@ -12,13 +12,7 @@ import {
   Button,
 } from "react-native";
 
-import {
-  CameraView,
-  useCameraPermissions,
-  useMicrophonePermissions,
-} from "expo-camera";
-import { Video } from "expo-av";
-import * as ImagePicker from "expo-image-picker";
+
 
 
 export default function HomeScreen({ navigation }) {
@@ -26,63 +20,6 @@ export default function HomeScreen({ navigation }) {
   const [trendingMovies, setTrendingMovies] = useState([]);
   const [allMovies, setAllMovies] = useState([]);
   const [loading, setLoading] = useState(false);
-
-  const [permission, requestPermission] = useCameraPermissions();
-  const [micPermissions, requestMicPermission] = useMicrophonePermissions();
-
-  const permissionResult = ImagePicker.requestMediaLibraryPermissionsAsync();
-
-  const cameraRef = useRef(null);
-  const [isCameraReady, setIsCameraReady] = useState(false);
-  const [photoUri, setPhotoUri] = useState("https://i.pinimg.com/1200x/6e/62/65/6e62651c41f6b8d7248c1b7f76480e88.jpg");
-  const [recording, setRecording] = useState(false);
-  const [videoUri, setVideoUri] = useState(null);
-
-  // Request permissions
-  useEffect(() => {
-    (async () => {
-      if (!permission?.granted) await requestPermission();
-      if (!micPermissions?.granted) await requestMicPermission();
-      await permissionResult();
-    })();
-  }, [permission, micPermissions?.granted]);
-
-  // Take picture
-  const takePicture = async () => {
-    if (cameraRef.current && isCameraReady) {
-      try {
-        const photo = await cameraRef.current.takePictureAsync();
-        setPhotoUri(photo.uri);
-        console.log("📸 Photo taken:", photo.uri);
-      } catch (error) {
-        console.log("Error taking picture:", error);
-      }
-    }
-  };
-
-  // Start/Stop recording
-  const handleRecord = async () => {
-    if (!cameraRef.current || !isCameraReady) return;
-
-    try {
-      if (!recording) {
-        console.log(" Starting recording...");
-        setRecording(true);
-        const video = await cameraRef.current.recordAsync({
-          quality: "720p"
-        });
-        setVideoUri(video.uri);
-        console.log("Video saved:", video.uri);
-      } else {
-        console.log("Stopping recording...");
-        cameraRef.current.stopRecording();
-        setRecording(false);
-      }
-    } catch (error) {
-      console.log("Recording error:", error);
-      setRecording(false);
-    }
-  };
 
   const trendingURL = "https://api.themoviedb.org/3/trending/movie/day?language=en-US";
   const allMoviesURL = "https://api.themoviedb.org/3/trending/all/day?language=en-US";
@@ -154,52 +91,7 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <ScrollView style={styles.container}>
-      {/* Display photo */}
-      <Image source={{ uri: photoUri }} style={{ width: 160, height: 240, margin: 20 }} />
-
-      {/* Camera preview */}
-      <CameraView
-        ref={cameraRef}
-        style={{ width: 160, height: 240, margin: 20 }}
-        facing="back"
-        mode="video"
-        enableVideoRecording
-        enableAudioRecording
-        onCameraReady={() => {
-          setIsCameraReady(true);
-          console.log("✅ Camera ready");
-        }}
-        hidden={false}
-      />
-
-      <Button title="Take Picture" onPress={takePicture} />
-      <Button
-        title={recording ? "Stop Recording" : "Start Recording"}
-        color={recording ? "red" : "green"}
-        onPress={handleRecord}
-      />
-
-      {videoUri && (
-        <Video
-          source={{ uri: videoUri }}
-          style={{ width: 200, height: 250, marginTop: 10 }}
-          useNativeControls
-          resizeMode="cover"
-          shouldPlay
-        />
-      )}
-
-      <Button title="pick an image"
-      onPress={async()=>{
-        console.log("Pick Image")
-        const result = await ImagePicker.launchImageLibraryAsync({
-          mediaTypes: ImagePicker.MediaTypeOptions.Images,
-          allowsEditing: true,
-          aspect: [4, 3],
-          quality: 1,
-          
-        })
-      }}></Button>
+      
 
       <Text style={styles.header}>🎬 moBie</Text>
 
