@@ -109,7 +109,7 @@ export default function HomeScreen({ navigation }) {
         </View>
       ) : (
         <>
-          <Text style={styles.sectionTitle}>Trending Now</Text>
+          <Text style={styles.sectionTitle}>Recommended Movies</Text>
 
           <FlatList
             data={filteredTrending}
