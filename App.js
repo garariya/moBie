@@ -17,16 +17,56 @@ import SignupScreen from './screens/SignupScreen';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
+import { Ionicons } from '@expo/vector-icons';
+
 function TabNavigator() {
   return (
-    <Tab.Navigator initialRouteName="Home">
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Explore" component={ExplorePage} />
-      <Tab.Screen name="Help" component={HelpCenter} />
-      <Tab.Screen name="Account" component={AccountCenter} />
+    <Tab.Navigator
+      screenOptions={{
+        tabBarActiveTintColor: '#0099ff',
+        tabBarInactiveTintColor: 'gray',
+      }}
+    >
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="home-outline" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Explore"
+        component={ExplorePage}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="search-outline" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Help"
+        component={HelpCenter}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="help-circle-outline" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Account"
+        component={AccountCenter}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="person-outline" size={size} color={color} />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 }
+
 
 export default function App() {
   return (

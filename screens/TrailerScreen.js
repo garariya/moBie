@@ -17,7 +17,7 @@ const TrailerScreen = ({ route }) => {
         );
         const data = await res.json();
 
-        console.log("📦 TMDB Response:", data);
+        console.log("TMDB Response:", data);
 
         const trailer = data.results.find(
           (v) => v.type === 'Trailer' && v.site === 'YouTube'
@@ -29,7 +29,7 @@ const TrailerScreen = ({ route }) => {
           Alert.alert('No Trailer', 'Sorry, no trailer found for this movie.');
         }
       } catch (error) {
-        console.error('❌ Error fetching trailer:', error);
+        console.error('Error fetching trailer:', error);
       } finally {
         setLoading(false);
       }
@@ -60,7 +60,7 @@ const TrailerScreen = ({ route }) => {
         height={300}
         play={true}
         videoId={trailerKey}
-        onError={(e) => console.log('❌ YouTube Player Error:', e)}
+        onError={(e) => console.log('YouTube Player Error:', e)}
       />
     </View>
   );

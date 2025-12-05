@@ -6,27 +6,30 @@ const HelpCenter = () => {
   const [sentence, setSentence] = useState('');
 
   const handleClick = () => {
-
     if (!sentence.trim()) {
       Alert.alert("Error", "Please enter your issue before submitting.");
       return;
     }
 
-    emailjs
-      .send(
-        "service_5mauzjb",           // your service ID
-        "template_fn3xq13",          // your template ID
-        { message: sentence },       // the data sent to EmailJS
-        { publicKey: "INPAcIjYp1Aei6bwI" } // correct format for React Native
-      )
-      .then(() => {
-        Alert.alert("Success", "Your message has been sent!");
-        setSentence("");
-      })
-      .catch((err) => {
-        console.log(err);
-        Alert.alert("Error", "Something went wrong");
-      });
+    const templateParams = {
+      user_message: sentence,
+    };
+
+   emailjs.send(
+  "service_5mauzjb",
+  "template_fn3xq13",
+  templateParams,
+  { publicKey: "INPAcIjYp1Aei6bwI" }
+)
+.then(() => {
+  Alert.alert("Success", "Your message has been sent!");
+  setSentence("");
+})
+.catch((err) => {
+  console.log(err);
+  Alert.alert("Error", "Something went wrong.");
+});
+
   };
 
   return (
@@ -35,6 +38,7 @@ const HelpCenter = () => {
 
       <TextInput
         placeholder="What’s the issue?"
+        placeholderTextColor="#999"
         value={sentence}
         onChangeText={setSentence}
         style={styles.input}
@@ -50,20 +54,23 @@ export default HelpCenter;
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     padding: 20,
+    backgroundColor: '#fff',
   },
   heading: {
-    fontSize: 20,
-    fontWeight: "bold",
-    marginBottom: 15,
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginBottom: 20,
   },
   input: {
     borderWidth: 1,
-    borderColor: "#ccc",
+    borderColor: '#ccc',
     borderRadius: 8,
-    padding: 10,
+    padding: 12,
     fontSize: 16,
-    marginBottom: 15,
-    height: 100,
+    marginBottom: 20,
+    height: 120,
+    textAlignVertical: 'top',
   },
 });

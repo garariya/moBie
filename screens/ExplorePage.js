@@ -1,47 +1,57 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import React from "react";
-import { LinearGradient } from "expo-linear-gradient";
 
 const ExplorePage = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      {/* Movies Box */}
-      <TouchableOpacity
-        style={styles.boxContainer}
-        onPress={() => navigation.navigate("MoviesExplore")}
-      >
-        <LinearGradient
-          colors={["#ff8c00", "#ff0080"]}
-          style={styles.gradientBox}
-        >
-          <Text style={styles.boxText}>Movies</Text>
-        </LinearGradient>
-      </TouchableOpacity>
 
-      {/* TV Series Box */}
-      <TouchableOpacity
-        style={styles.boxContainer}
-        onPress={() => navigation.navigate("TVSeriesExplore")}
-      >
-        <LinearGradient
-          colors={["#0099ff", "#8a2be2"]}
-          style={styles.gradientBox}
-        >
-          <Text style={styles.boxText}>TV Shows</Text>
-        </LinearGradient>
-      </TouchableOpacity>
+      <Text style={styles.header}>Explore</Text>
 
-      <TouchableOpacity
-        style={styles.boxContainer}
-        onPress={() => navigation.navigate("Animated")}
-      >
-        <LinearGradient
-          colors={["#3DFF99", "#0FA958"]}
-          style={styles.gradientBox}
+
+
+      <Text style={styles.sectionTitle}>Categories</Text>
+
+
+      <View style={styles.grid}>
+        <TouchableOpacity
+          style={styles.gridItem}
+          onPress={() => navigation.navigate("MoviesExplore")}
         >
-          <Text style={styles.boxText}>Animated</Text>
-        </LinearGradient>
-      </TouchableOpacity>
+          <View style={styles.gridPoster}>
+            <Text style={styles.gridTitle}>Movies</Text>
+          </View>
+        </TouchableOpacity>
+
+
+        <TouchableOpacity
+          style={styles.gridItem}
+          onPress={() => navigation.navigate("TVSeriesExplore")}
+        >
+          <View style={styles.gridPoster}>
+            <Text style={styles.gridTitle}>TV Shows</Text>
+          </View>
+        </TouchableOpacity>
+
+
+        <TouchableOpacity
+          style={styles.gridItem}
+          onPress={() => navigation.navigate("Animated")}
+        >
+          <View style={styles.gridPoster}>
+            <Text style={styles.gridTitle}>Animated</Text>
+          </View>
+        </TouchableOpacity>
+
+
+        <TouchableOpacity
+          style={styles.gridItem}
+          onPress={() => navigation.navigate("Animated")}
+        >
+          <View style={styles.gridPoster}>
+            <Text style={styles.gridTitle}>more categories...</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -50,33 +60,55 @@ export default ExplorePage;
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: "#0c0c0c",
+    paddingHorizontal: 15,
+    paddingTop: 50,
     flex: 1,
-    backgroundColor: "#000",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
   },
-
-  boxContainer: {
-    width: "90%",
-    marginVertical: 12,
-    borderRadius: 20,
-    overflow: "hidden",
-  },
-
-  gradientBox: {
-    width: "100%",
-    paddingVertical: 30,
-    borderRadius: 20,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-  boxText: {
-    fontSize: 24,
-    fontWeight: "bold",
+  header: {
     color: "#fff",
-    textTransform: "uppercase",
-    letterSpacing: 1,
+    fontSize: 28,
+    fontWeight: "bold",
+    marginBottom: 20,
+  },
+  searchInput: {
+    backgroundColor: "#1a1a1a",
+    color: "#fff",
+    borderRadius: 10,
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    fontSize: 16,
+    marginBottom: 20,
+  },
+  sectionTitle: {
+    color: "#fff",
+    fontSize: 20,
+    fontWeight: "bold",
+    marginVertical: 10,
+  },
+  grid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    marginTop: 10,
+    paddingBottom: 80,
+  },
+  gridItem: {
+    width: "47%",
+    marginBottom: 20,
+  },
+  gridPoster: {
+    width: "100%",
+    height: 220,
+    borderRadius: 10,
+    backgroundColor: "#1a1a1a",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  gridTitle: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
+    textAlign: "center",
   },
 });

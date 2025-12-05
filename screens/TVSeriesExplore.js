@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, TouchableOpacity, FlatList, Image, ScrollView, TextInput } from 'react-native'
 import React,{useState, useEffect} from 'react'
 
-const TVSeriesExplore = () => {
+const TVSeriesExplore = ({navigation}) => {
   
   const [searchQuery, setSearchQuery] = useState('');
   const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
