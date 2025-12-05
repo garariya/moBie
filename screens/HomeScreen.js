@@ -105,7 +105,7 @@ export default function HomeScreen({ navigation }) {
 
       {noResults ? (
         <View style={styles.noResultsContainer}>
-          <Text style={styles.noResultsText}>No results found 😞</Text>
+          <Text style={styles.noResultsText}>No results found!</Text>
         </View>
       ) : (
         <>
