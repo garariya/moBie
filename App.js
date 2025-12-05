@@ -11,6 +11,8 @@ import AccountCenter from './screens/AccountCenter';
 import MoviesExplore from './screens/MoviesExplore';
 import TVSeriesExplore from './screens/TVSeriesExplore';
 import Animated from './screens/Animated';
+import LoginScreen from './screens/LoginScreen';
+import SignupScreen from './screens/SignupScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -29,13 +31,15 @@ function TabNavigator() {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Tabs">
+      <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Tabs" component={TabNavigator} options={{ headerShown: false }} />
         <Stack.Screen name="MovieCard" component={MovieCard} />
         <Stack.Screen name="Trailer" component={TrailerScreen} />
         <Stack.Screen name="MoviesExplore" component={MoviesExplore} />
         <Stack.Screen name="TVSeriesExplore" component={TVSeriesExplore} />
         <Stack.Screen name="Animated" component={Animated} />
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Signup" component={SignupScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
